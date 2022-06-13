@@ -2,6 +2,7 @@
 
 let gameContainer = document.getElementById("game");
 let score: number = 0;
+localStorage.bestScore = Infinity;
 
 const COLORS = [
   "red",
@@ -73,6 +74,7 @@ function handleCardClick(event) {
 
   const updatedClicked = gameContainer.querySelectorAll('.clicked');
   if (updatedClicked.length === 2) { solveOrReset(updatedClicked) }
+  if (document.querySelectorAll('.solved').length === COLORS.length) { endGame() }
 }
 
 function solveOrReset(cards) {
@@ -81,6 +83,14 @@ function solveOrReset(cards) {
     cards[1].classList.replace('clicked', 'solved');
   } else {
     setTimeout( resetCards, 1000, cards );
+  }
+}
+
+function endGame() {
+  alert("You won!")!
+  if (score < Number(localStorage.bestScore)) {
+    localStorage.bestScore = score;
+    document.querySelector('#best-score').textContent = localStorage.bestScore;
   }
 }
 

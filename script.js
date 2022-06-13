@@ -1,6 +1,7 @@
 "use strict";
 let gameContainer = document.getElementById("game");
 let score = 0;
+localStorage.bestScore = Infinity;
 const COLORS = [
     "red",
     "blue",
@@ -60,6 +61,9 @@ function handleCardClick(event) {
     if (updatedClicked.length === 2) {
         solveOrReset(updatedClicked);
     }
+    if (document.querySelectorAll('.solved').length === COLORS.length) {
+        endGame();
+    }
 }
 function solveOrReset(cards) {
     if (cards[0].classList[0] === cards[1].classList[0]) {
@@ -68,6 +72,13 @@ function solveOrReset(cards) {
     }
     else {
         setTimeout(resetCards, 1000, cards);
+    }
+}
+function endGame() {
+    alert("You won!");
+    if (score < Number(localStorage.bestScore)) {
+        localStorage.bestScore = score;
+        document.querySelector('#best-score').textContent = localStorage.bestScore;
     }
 }
 function resetCards(cards) {
