@@ -1,3 +1,5 @@
+"use strict";
+
 const gameContainer = document.getElementById("game");
 
 const COLORS = [
@@ -60,19 +62,31 @@ function createDivsForColors(colorArray) {
 // TODO: Implement this function!
 function handleCardClick(event) {
   // you can use event.target to see which element was clicked
-  const gameDiv = document.querySelector('#game');
-  const cardsClicked = gameDiv.querySelectorAll('.clicked').length;
-  // for (let card of <any>gameDiv.children) {
-  //   if (card.classList.contains('clicked') === true) { nClicked++ }
-  // }
-  if (cardsClicked < 2) {
-    event.target.style.backgroundColor = event.target.className;
+  const cardsClicked = gameContainer.querySelectorAll('.clicked');
+
+  if (!event.target.classList.contains('solved') && cardsClicked.length < 2) {
+    event.target.style.backgroundColor = event.target.classList[0];
     event.target.classList.add('clicked');
-  } else {
-    console.log("Only two may be clicked at a time.");
   }
-  // if (nClicked === 2 && gameDiv.querySelectorAll('.clicked'))
-  console.log(cardsClicked);
+
+  const updatedClicked = gameContainer.querySelectorAll('.clicked');
+  if (updatedClicked.length === 2) { solveOrReset(updatedClicked) }
+}
+
+function solveOrReset(cards) {
+  if (cards[0].classList[0] === cards[1].classList[0]) {
+    cards[0].classList.replace('clicked', 'solved');
+    cards[1].classList.replace('clicked', 'solved');
+  } else {
+    setTimeout( resetCards, 1000, cards );
+  }
+}
+
+function resetCards(cards) {
+  for (let card of cards) {
+    card.style.backgroundColor = '';
+    card.classList.remove('clicked');
+  }
 }
 
 // when the DOM loads
