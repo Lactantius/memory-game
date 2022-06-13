@@ -1,5 +1,5 @@
 "use strict";
-const gameContainer = document.getElementById("game");
+let gameContainer = document.getElementById("game");
 const COLORS = [
     "red",
     "blue",
@@ -46,7 +46,6 @@ function createDivsForColors(colorArray) {
         gameContainer.append(newDiv);
     }
 }
-// TODO: Implement this function!
 function handleCardClick(event) {
     // you can use event.target to see which element was clicked
     const cardsClicked = gameContainer.querySelectorAll('.clicked');
@@ -76,3 +75,12 @@ function resetCards(cards) {
 }
 // when the DOM loads
 createDivsForColors(shuffledColors);
+document.querySelector('#new-game').addEventListener('click', function () {
+    // gameContainer.remove();
+    // gameContainer = document.createElement('div');
+    // gameContainer.id = 'game';
+    // document.body.prepend(gameContainer);
+    // createDivsForColors(shuffle(COLORS));
+    gameContainer.replaceChildren('');
+    createDivsForColors(shuffle(COLORS));
+});

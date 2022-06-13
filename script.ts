@@ -1,6 +1,6 @@
 "use strict";
 
-const gameContainer = document.getElementById("game");
+let gameContainer = document.getElementById("game");
 
 const COLORS = [
   "red",
@@ -43,7 +43,7 @@ let shuffledColors = shuffle(COLORS);
 // this function loops over the array of colors
 // it creates a new div and gives it a class with the value of the color
 // it also adds an event listener for a click for each card
-function createDivsForColors(colorArray) {
+function createDivsForColors(colorArray: string[]) {
   for (let color of colorArray) {
     // create a new div
     const newDiv = document.createElement("div");
@@ -59,7 +59,6 @@ function createDivsForColors(colorArray) {
   }
 }
 
-// TODO: Implement this function!
 function handleCardClick(event) {
   // you can use event.target to see which element was clicked
   const cardsClicked = gameContainer.querySelectorAll('.clicked');
@@ -91,5 +90,16 @@ function resetCards(cards) {
 
 // when the DOM loads
 createDivsForColors(shuffledColors);
+
+document.querySelector('#new-game').addEventListener('click', function() {
+  // gameContainer.remove();
+  // gameContainer = document.createElement('div');
+  // gameContainer.id = 'game';
+  // document.body.prepend(gameContainer);
+  // createDivsForColors(shuffle(COLORS));
+  gameContainer.replaceChildren('');
+  createDivsForColors(shuffle(COLORS));
+  }
+)
 
 /* */
