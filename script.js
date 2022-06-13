@@ -1,5 +1,6 @@
 "use strict";
 let gameContainer = document.getElementById("game");
+let score = 0;
 const COLORS = [
     "red",
     "blue",
@@ -52,6 +53,8 @@ function handleCardClick(event) {
     if (!event.target.classList.contains('solved') && cardsClicked.length < 2) {
         event.target.style.backgroundColor = event.target.classList[0];
         event.target.classList.add('clicked');
+        score++;
+        document.querySelector('#score').textContent = String(score);
     }
     const updatedClicked = gameContainer.querySelectorAll('.clicked');
     if (updatedClicked.length === 2) {
@@ -76,11 +79,8 @@ function resetCards(cards) {
 // when the DOM loads
 createDivsForColors(shuffledColors);
 document.querySelector('#new-game').addEventListener('click', function () {
-    // gameContainer.remove();
-    // gameContainer = document.createElement('div');
-    // gameContainer.id = 'game';
-    // document.body.prepend(gameContainer);
-    // createDivsForColors(shuffle(COLORS));
     gameContainer.replaceChildren('');
     createDivsForColors(shuffle(COLORS));
+    score = 0;
+    document.querySelector('#score').textContent = String(score);
 });
