@@ -1,8 +1,11 @@
 "use strict";
 
-let gameContainer = document.getElementById("game");
+const gameContainer = document.getElementById("game");
 let score: number = 0;
-localStorage.bestScore = Infinity;
+if (!localStorage.bestScore) {
+  localStorage.bestscore = Infinity
+}
+document.querySelector('#best-score').textContent = localStorage.bestScore;
 
 const COLORS = [
   "red",
