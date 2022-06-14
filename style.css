@@ -1,7 +1,49 @@
+body {
+  background-color: #002038;
+  color: darkgray;
+}
+
+h1 {
+  text-align: center;
+  font-size: 3em;
+  font-family: sans-serif;
+  font-weight: 200;
+  text-transform: uppercase;
+}
+
+#game {
+  margin: auto;
+  width: 80%;
+}
+
 #game div {
-  border: 1px solid black;
+  border: 1px solid darkgray;
   width: 15%;
   height: 200px;
   margin: 10px;
   display: inline-block;
+  transition: 500ms;
+  border-radius: 15px;
+}
+
+#new-game {
+  font-size: 2em;
+  margin-left: 40%;
+  margin-right: 40%;
+  margin-top: 2em;
+  width: 20%;
+  border: none;
+  border-radius: 15px;
+  color: #002038;
+  background-color: darkgray;
+}
+
+aside {
+  width: 100%;
+}
+
+.score {
+  display: block;
+  text-align: right;
+  margin-right: 30px;
 }
