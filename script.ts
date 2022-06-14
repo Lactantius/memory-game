@@ -3,9 +3,9 @@
 const gameContainer = document.getElementById("game");
 let score: number = 0;
 if (!localStorage.bestScore) {
-  localStorage.bestscore = Infinity
+  localStorage.bestscore = Infinity;
 }
-document.querySelector('#best-score').textContent = localStorage.bestScore;
+document.querySelector("#best-score").textContent = localStorage.bestScore;
 
 const COLORS = [
   "red",
@@ -17,7 +17,7 @@ const COLORS = [
   "blue",
   "green",
   "orange",
-  "purple"
+  "purple",
 ];
 
 // here is a helper function to shuffle an array
@@ -66,53 +66,56 @@ function createDivsForColors(colorArray: string[]) {
 
 function handleCardClick(event) {
   // you can use event.target to see which element was clicked
-  const cardsClicked = gameContainer.querySelectorAll('.clicked');
+  const cardsClicked = gameContainer.querySelectorAll(".clicked");
 
-  if (!event.target.classList.contains('solved') && cardsClicked.length < 2) {
+  if (!event.target.classList.contains("solved") && cardsClicked.length < 2) {
     event.target.style.backgroundColor = event.target.classList[0];
-    event.target.classList.add('clicked');
+    event.target.classList.add("clicked");
     score++;
-    document.querySelector('#score').textContent = String(score);
+    document.querySelector("#score").textContent = String(score);
   }
 
-  const updatedClicked = gameContainer.querySelectorAll('.clicked');
-  if (updatedClicked.length === 2) { solveOrReset(updatedClicked) }
-  if (document.querySelectorAll('.solved').length === COLORS.length) { endGame() }
+  const updatedClicked = gameContainer.querySelectorAll(".clicked");
+  if (updatedClicked.length === 2) {
+    solveOrReset(updatedClicked);
+  }
+  if (document.querySelectorAll(".solved").length === COLORS.length) {
+    endGame();
+  }
 }
 
 function solveOrReset(cards) {
   if (cards[0].classList[0] === cards[1].classList[0]) {
-    cards[0].classList.replace('clicked', 'solved');
-    cards[1].classList.replace('clicked', 'solved');
+    cards[0].classList.replace("clicked", "solved");
+    cards[1].classList.replace("clicked", "solved");
   } else {
-    setTimeout( resetCards, 1000, cards );
+    setTimeout(resetCards, 1000, cards);
   }
 }
 
 function endGame() {
-  alert("You won!")!
+  alert("You won!")!;
   if (score < Number(localStorage.bestScore)) {
     localStorage.bestScore = score;
-    document.querySelector('#best-score').textContent = localStorage.bestScore;
+    document.querySelector("#best-score").textContent = localStorage.bestScore;
   }
 }
 
 function resetCards(cards) {
   for (let card of cards) {
-    card.style.backgroundColor = '';
-    card.classList.remove('clicked');
+    card.style.backgroundColor = "";
+    card.classList.remove("clicked");
   }
 }
 
 // when the DOM loads
 createDivsForColors(shuffledColors);
 
-document.querySelector('#new-game').addEventListener('click', function() {
-  gameContainer.replaceChildren('');
+document.querySelector("#new-game").addEventListener("click", function () {
+  gameContainer.replaceChildren("");
   createDivsForColors(shuffle(COLORS));
   score = 0;
-  document.querySelector('#score').textContent = String(score);
-  }
-)
+  document.querySelector("#score").textContent = String(score);
+});
 
 /* */
